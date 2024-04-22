@@ -1,12 +1,16 @@
 package com.example.rickandmorty.ui.characterlist
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.rickandmorty.R
 import com.example.rickandmorty.databinding.ActivityCharacterListBinding
+import com.example.rickandmorty.ui.characterdetail.CharacterDetailActivity
 import com.example.rickandmorty.ui.characterlist.adapter.CharactersGridAdapter
 
 class CharacterListActivity : AppCompatActivity(), CharactersGridAdapter.CharactersGridListener {
@@ -35,6 +39,9 @@ class CharacterListActivity : AppCompatActivity(), CharactersGridAdapter.Charact
         viewModel.showIndicator.observeForever {
             if (it) { showActivityIndicator() } else { hideActivityIndicator() }
         }
+        viewModel.handleError.observeForever {
+            showAlertError(it)
+        }
     }
 
     private fun setupRecycler() {
@@ -53,7 +60,13 @@ class CharacterListActivity : AppCompatActivity(), CharactersGridAdapter.Charact
         })
     }
 
-    override fun onSelectedCharacter(position: Int) {}
+    override fun onSelectedCharacter(position: Int) {
+        val character = viewModel.characterList[position]
+        val intent = Intent(this, CharacterDetailActivity::class.java).apply {
+            putExtra(CharacterDetailActivity.CHARACTER_DETAIL, character)
+        }
+        startActivity(intent)
+    }
 
     private fun showActivityIndicator() {
         binding.llHudLoader.visibility = View.VISIBLE
@@ -61,5 +74,15 @@ class CharacterListActivity : AppCompatActivity(), CharactersGridAdapter.Charact
 
     private fun hideActivityIndicator() {
         binding.llHudLoader.visibility = View.GONE
+    }
+
+    private fun showAlertError(errorMessage: String) {
+        AlertDialog.Builder(this, R.style.AlertDialogTheme)
+            .setTitle(getString(R.string.error_title))
+            .setMessage(errorMessage)
+            .setPositiveButton(getString(R.string.Ok)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
 }

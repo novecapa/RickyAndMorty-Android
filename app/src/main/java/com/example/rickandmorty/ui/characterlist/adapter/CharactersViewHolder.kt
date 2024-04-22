@@ -9,11 +9,13 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.rickandmorty.R
 import com.example.rickandmorty.domain.entities.characters.CharacterEntity
+import com.example.rickandmorty.domain.entities.characters.statusColor
 
 class CharactersViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
     val rlItemGrid = view.findViewById<ConstraintLayout>(R.id.rlItemGrid)
     val imageItem = view.findViewById<ImageView>(R.id.imageItem)
+    val viewStatus = view.findViewById<View>(R.id.viewStatus)
     val tvName = view.findViewById<TextView>(R.id.tvName)
 
     fun render(character: CharacterEntity) {
@@ -23,6 +25,9 @@ class CharactersViewHolder(view: View): RecyclerView.ViewHolder(view) {
             .load(character.image)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(imageItem)
+
+        // Status
+        viewStatus.setBackgroundResource(character.statusColor)
 
         // Name
         tvName.text = character.name

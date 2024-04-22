@@ -12,4 +12,5 @@
     <color name="greenPin">#57C198</color>
     <color name="yelloyPin">#EAD960</color>
     <color name="redPin">#CB3820</color>
+    <color name="greyPin">#F7F7F7</color>
 </resources>

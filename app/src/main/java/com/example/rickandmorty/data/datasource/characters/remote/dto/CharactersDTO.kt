@@ -12,3 +12,5 @@ val CharactersDTO.toEntity: CharactersEntity
         characters = results.map { it.toEntity },
         hasNextPage = info.hasNextPage
     )
+
+data class CharactersWithException<T1, T2>(val result: T1, val error: T2)

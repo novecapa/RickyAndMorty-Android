@@ -1,7 +1,6 @@
 package com.example.rickandmorty.data.datasource.characters.database.models
 
 import com.example.rickandmorty.domain.entities.characters.CharacterEntity
-import com.example.rickandmorty.domain.entities.characters.LocationEntity
 import io.realm.kotlin.ext.realmListOf
 import io.realm.kotlin.types.RealmList
 import io.realm.kotlin.types.RealmObject

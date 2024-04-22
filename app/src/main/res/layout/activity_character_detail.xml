@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rlItem">
+
+            <ImageView
+                android:id="@+id/imageItem"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:minHeight="240dp"
+                app:layout_constraintDimensionRatio="H,1:1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:scaleType="fitCenter"/>
+
+            <!-- VStack-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginTop="6dp"
+                android:id="@+id/llDataInfo"
+                app:layout_constraintTop_toBottomOf="@+id/imageItem"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:minHeight="30dp"
+                    android:orientation="horizontal">
+
+                    <!-- Status Color-->
+                    <View
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/bubble_status_alive"
+                        android:id="@+id/viewStatus"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView">
+                    </View>
+
+                    <!-- Status Name-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:layout_marginStart="6dp"
+                        android:minHeight="20dp"
+                        android:maxLines="2"
+                        android:id="@+id/tvStatus"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"
+                        android:text="Rick"
+                        android:maxHeight="40dp"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView">
+                    </TextView>
+
+                </LinearLayout>
+
+                <!-- Name-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:id="@+id/tvName"
+                    android:textSize="19sp"
+                    android:textColor="@color/black"
+                    android:text="Status"
+                    android:maxHeight="40dp">
+                </TextView>
+
+                <!-- Type-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:id="@+id/tvType"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+                    android:text="Type"
+                    android:maxHeight="40dp">
+                </TextView>
+
+                <!-- Specie-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:id="@+id/tvSpecie"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+                    android:text="Specie"
+                    android:maxHeight="40dp">
+                </TextView>
+
+                <!-- Gender-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:id="@+id/tvGender"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+                    android:text="Gender"
+                    android:maxHeight="40dp">
+                </TextView>
+
+                <!-- Episodes-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:id="@+id/tvEpisodes"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+                    android:text="Appear on n episode(s)"
+                    android:maxHeight="40dp">
+                </TextView>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

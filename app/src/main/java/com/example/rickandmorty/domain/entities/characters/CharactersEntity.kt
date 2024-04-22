@@ -7,3 +7,5 @@ data class CharactersEntity(
 
 val CharactersEntity.addNewPage: Int
     get() = if (hasNextPage) 1 else 0
+
+data class CharactersEntityWithException<T1, T2>(val result: T1, val error: T2)

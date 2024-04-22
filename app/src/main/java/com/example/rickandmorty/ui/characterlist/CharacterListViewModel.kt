@@ -25,6 +25,7 @@ class CharacterListViewModel: ViewModel() {
     val refreshList = MutableLiveData<Boolean>()
     val scrollToTop = MutableLiveData<Boolean>()
     val showIndicator = MutableLiveData<Boolean>()
+    val handleError = MutableLiveData<String>()
 
     init {
         val retrofit = RetrofitHelper.getRetrofit()
@@ -41,13 +42,17 @@ class CharacterListViewModel: ViewModel() {
         viewModelScope.launch {
             showIndicator.postValue(true)
 
-            val result = useCase.getCharacters(currentPage)
+            val res = useCase.getCharacters(currentPage)
             if (currentPage == 1) { characterList.clear() }
 
-            characterList.addAll(result.characters)
-
-            currentPage += result.addNewPage
-            hasNewPage = result.hasNextPage
+            // Check error
+            res.error?.let {
+                handleError.postValue((it.localizedMessage))
+            } ?: run {
+                characterList.addAll(res.result.characters)
+                currentPage += res.result.addNewPage
+                hasNewPage = res.result.hasNextPage
+            }
 
             refreshList.postValue(true)
             showIndicator.postValue(false)

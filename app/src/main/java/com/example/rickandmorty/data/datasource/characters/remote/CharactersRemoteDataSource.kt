@@ -6,33 +6,33 @@ import retrofit2.Retrofit
 import java.lang.Exception
 
 interface CharactersRemoteDataSourceInterface {
-    suspend fun getCharacters(page: Int): CharactersDTO?
-    suspend fun searchCharacters(page: Int, name: String): CharactersDTO?
+    suspend fun getCharacters(page: Int): CharactersWithException<CharactersDTO?, Exception?>
+    suspend fun searchCharacters(page: Int, name: String): CharactersWithException<CharactersDTO?, Exception?>
 }
 
 class CharactersRemoteDataSource(
     private val retrofit: Retrofit
 ): CharactersRemoteDataSourceInterface {
 
-    override suspend fun getCharacters(page: Int): CharactersDTO? {
+    override suspend fun getCharacters(page: Int): CharactersWithException<CharactersDTO?, Exception?> {
         return withContext(Dispatchers.IO) {
             try {
-                retrofit.create(CharactersRemoteInterface::class.java)
-                    .getCharacters(page).body()
+                val res =  retrofit.create(CharactersRemoteInterface::class.java).getCharacters(page).body()
+                CharactersWithException(res, null)
             } catch (e: Exception) {
-                null
+                CharactersWithException(null, e)
             }
         }
     }
 
     override suspend fun searchCharacters(page: Int,
-                                 name: String): CharactersDTO? {
+                                          name: String): CharactersWithException<CharactersDTO?, Exception?> {
         return withContext(Dispatchers.IO) {
             try {
-            retrofit.create(CharactersRemoteInterface::class.java)
-                .searchCharacters(page, name).body()
+                val res = retrofit.create(CharactersRemoteInterface::class.java).searchCharacters(page, name).body()
+                CharactersWithException(res, null)
             } catch (e: Exception) {
-                null
+                CharactersWithException(null, e)
             }
         }
     }
