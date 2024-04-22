@@ -3,12 +3,14 @@ package com.example.rickandmorty.ui.characterlist
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.rickandmorty.data.datasource.characters.database.models.CharactersDatabaseSource
 import com.example.rickandmorty.manager.network.RetrofitHelper
 import com.example.rickandmorty.data.datasource.characters.remote.dto.CharactersRemoteDataSource
 import com.example.rickandmorty.data.repositories.characters.CharactersRepository
 import com.example.rickandmorty.domain.entities.characters.CharacterEntity
 import com.example.rickandmorty.domain.entities.characters.addNewPage
 import com.example.rickandmorty.domain.usecases.characters.CharactersUseCase
+import com.example.rickandmorty.manager.database.RealmHelper
 import kotlinx.coroutines.launch
 
 class CharacterListViewModel: ViewModel() {
@@ -26,7 +28,9 @@ class CharacterListViewModel: ViewModel() {
     init {
         val retrofit = RetrofitHelper.getRetrofit()
         val dataSource = CharactersRemoteDataSource(retrofit)
-        val repository = CharactersRepository(dataSource)
+        val realm = RealmHelper.realm
+        val databaseSource = CharactersDatabaseSource(realm)
+        val repository = CharactersRepository(dataSource, databaseSource)
         useCase = CharactersUseCase(repository)
     }
 
