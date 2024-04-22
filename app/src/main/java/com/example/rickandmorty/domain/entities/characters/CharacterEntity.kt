@@ -1,5 +1,7 @@
 package com.example.rickandmorty.domain.entities.characters
 
+import com.example.rickandmorty.data.datasource.characters.database.models.RCharacter
+
 data class CharacterEntity(
     val id: Int,
     val name: String,

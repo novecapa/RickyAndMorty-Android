@@ -2,4 +2,8 @@
 <resources>
 
     <style name="Theme.RickAndMorty" parent="Theme.AppCompat.Light.NoActionBar" />
+
+    <style name="ProgressBarStyle">
+        <item name="colorAccent">@color/bluePin</item>
+    </style>
 </resources>

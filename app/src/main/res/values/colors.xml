@@ -7,4 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="bluePin">#459DDA</color>
+    <color name="greenPin">#57C198</color>
+    <color name="yelloyPin">#EAD960</color>
+    <color name="redPin">#CB3820</color>
 </resources>

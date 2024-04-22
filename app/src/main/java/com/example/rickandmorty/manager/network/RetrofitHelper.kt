@@ -1,4 +1,4 @@
-package com.example.rickandmorty.data.datasource.characters
+package com.example.rickandmorty.manager.network
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -13,7 +13,6 @@ class RetrofitHelper {
         private val timeOut: Long = 30
 
         fun getRetrofit(): Retrofit {
-
             return Retrofit.Builder()
                 .baseUrl(baseURL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -21,9 +20,12 @@ class RetrofitHelper {
                 .build()
         }
         private fun getHttpClient(): OkHttpClient {
+            val interceptor = LoggingInterceptor()
             return OkHttpClient.Builder()
                 .readTimeout(timeOut, TimeUnit.SECONDS)
                 .connectTimeout(timeOut, TimeUnit.SECONDS)
+                .addInterceptor(interceptor)
+                .addInterceptor(interceptor.create())
                 .build()
         }
     }
