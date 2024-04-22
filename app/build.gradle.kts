@@ -84,4 +84,6 @@ dependencies {
 
     // Image cache
     implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    testImplementation("io.mockk:mockk:1.13.10")
 }
