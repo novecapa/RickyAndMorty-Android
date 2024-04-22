@@ -6,11 +6,17 @@ import io.realm.kotlin.UpdatePolicy
 import io.realm.kotlin.ext.query
 import java.lang.Exception
 
+interface CharactersDatabaseSourceInterface {
+    fun saveCharacters(characterList: List<CharacterEntity>)
+    fun getCharacters(): List<RCharacter>
+    fun searchCharacters(name: String): List<RCharacter>
+}
+
 class CharactersDatabaseSource(
     val realm: Realm
-) {
+): CharactersDatabaseSourceInterface {
 
-    fun saveCharacters(characterList: List<CharacterEntity>) {
+    override fun saveCharacters(characterList: List<CharacterEntity>) {
         try {
             realm.writeBlocking {
                 characterList.forEach {
@@ -37,7 +43,7 @@ class CharactersDatabaseSource(
         }
     }
 
-    fun getCharacters(): List<RCharacter> {
+    override fun getCharacters(): List<RCharacter> {
         return try {
             realm.query<RCharacter>().find()
         } catch (e: Exception) {
@@ -45,7 +51,7 @@ class CharactersDatabaseSource(
         }
     }
 
-    fun searchCharacters(name: String): List<RCharacter> {
+    override fun searchCharacters(name: String): List<RCharacter> {
         return try {
             realm.query<RCharacter>("name CONTAINS[c] $0", name).find()
         } catch (e: Exception) {

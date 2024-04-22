@@ -11,6 +11,7 @@ import com.example.rickandmorty.domain.entities.characters.CharacterEntity
 import com.example.rickandmorty.domain.entities.characters.addNewPage
 import com.example.rickandmorty.domain.usecases.characters.CharactersUseCase
 import com.example.rickandmorty.manager.database.RealmHelper
+import com.example.rickandmorty.manager.network.NetworkMonitor
 import kotlinx.coroutines.launch
 
 class CharacterListViewModel: ViewModel() {
@@ -30,7 +31,8 @@ class CharacterListViewModel: ViewModel() {
         val dataSource = CharactersRemoteDataSource(retrofit)
         val realm = RealmHelper.realm
         val databaseSource = CharactersDatabaseSource(realm)
-        val repository = CharactersRepository(dataSource, databaseSource)
+        val networkMonitor = NetworkMonitor()
+        val repository = CharactersRepository(dataSource, databaseSource, networkMonitor)
         useCase = CharactersUseCase(repository)
     }
 
