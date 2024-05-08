@@ -30,7 +30,5 @@ class CharacterDetailViewModel(val character: CharacterEntity): ViewModel() {
     val characterDetail: CharacterEntity
         get() = character
 
-    fun fetchRelated() {
-
-    }
+    fun fetchRelated() {}
 }

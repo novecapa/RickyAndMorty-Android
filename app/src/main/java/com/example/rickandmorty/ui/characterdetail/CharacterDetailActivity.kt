@@ -55,6 +55,6 @@ class CharacterDetailActivity : AppCompatActivity() {
         binding.tvType.text = character.type
         binding.tvSpecie.text = character.species
         binding.tvGender.text = character.gender
-        binding.tvEpisodes.text = "Appears on ${character.episode.count()} episodes"
+        "Appears on ${character.episode.count()} episodes".also {  binding.tvEpisodes.text = it }
     }
 }
